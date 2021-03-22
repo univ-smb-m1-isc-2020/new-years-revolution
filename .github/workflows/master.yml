@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: '1.8.0'
+          java-version: '16'
 
       - name: Maven Build & Sonar analysis
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
