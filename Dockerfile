@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8-openj9:latest
+FROM openjdk:16
 
 COPY ./target/new-years-revolution-1.0-SNAPSHOT.jar .
 
