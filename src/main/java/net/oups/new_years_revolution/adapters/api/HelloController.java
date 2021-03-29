@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,10 @@ public class HelloController {
     }
 
     @RequestMapping("/")
-    public String index() {
-        return "Hello World!";
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("oui", "Yes.");
+        return modelAndView;
     }
 
     @GetMapping("/bonsoir")
