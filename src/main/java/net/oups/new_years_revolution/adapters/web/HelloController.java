@@ -1,4 +1,4 @@
-package net.oups.new_years_revolution.adapters.api;
+package net.oups.new_years_revolution.adapters.web;
 
 import net.oups.new_years_revolution.application.HelloService;
 import org.springframework.ui.Model;
