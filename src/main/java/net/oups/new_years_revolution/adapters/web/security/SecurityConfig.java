@@ -13,24 +13,34 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final CustomAuthenticationProvider customAuth;
+
+    public SecurityConfig(CustomAuthenticationProvider customAuth) {
+        this.customAuth = customAuth;
+    }
+
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("newyearsrevolution").password(passwordEncoder().encode("LaPazRevolution")).roles("ADMIN");
+        auth.authenticationProvider(customAuth);
+                //.inMemoryAuthentication()
+                //.withUser("newyearsrevolution").password(passwordEncoder().encode("LaPazRevolution")).roles("ADMIN");
     }
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/admin", true)
-                .failureUrl("/");
+                .failureUrl("/")
+                .and()
+                .logout().deleteCookies("remove").invalidateHttpSession(false)
+                .logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
     @Bean
