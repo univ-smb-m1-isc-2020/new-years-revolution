@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>New Years Revolution</title>
 <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
@@ -68,16 +69,15 @@
 
 <div>
     <p>Notre sélection</p>
+
     <table>
         <tr>
-            <th>Ma résolution</th>
-            <th>prise le</th>
-            <th>Tenu</th>
+            <th>Contenu</th>
+            <th>Auteur</th>
         </tr>
-        <tr>
-            <td>Je mange des bananes</td>
-            <td>06/04/2021</td>
-            <td>non</td>
+        <tr th:each="resolution : ${resolutionsList}">
+            <td><span th:text="${resolution.getContenu()}"> Contenu </span></td>
+            <td><span th:text="${resolution.getCreator().getLogin()}"> Auteur </span></td>
         </tr>
     </table>
     </div>

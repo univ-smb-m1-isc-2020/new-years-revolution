@@ -14,14 +14,6 @@ public class AccountService {
         this.repository = repository;
     }
 
-    @PostConstruct
-    public void initialize() {
-        if (repository.findAll().isEmpty()) {
-            repository.saveAndFlush(new Account("user", "password", "USER"));
-            repository.saveAndFlush(new Account("newyearsrevolution", "LaPazRevolution", "ADMIN"));
-        }
-    }
-
     public Account getAccountByLogin(String login) throws Exception {
         Account user = repository.findByLogin(login);
         if (user == null) {
