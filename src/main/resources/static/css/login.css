@@ -1,0 +1,46 @@
+body{
+    background-color: rgba(245, 156, 115, 0.76);
+    text-align: center;
+    margin-top: 10%;
+    
+}
+input[type = submit] {
+
+    background:rgba(245, 156, 115);
+    
+    color: #fff;
+    
+    border: 1px solid #eee;
+    
+    border-radius: 20px;
+    
+    box-shadow: 5px 5px 5px #eee;
+    
+    text-shadow:none;
+    margin-top: 4px;
+    }
+    
+input[type = submit]:hover {
+    
+    background: rgba(247, 175, 142, 0.76);
+    
+    color: #fff;
+    
+    border: 1px solid #eee;
+    
+    border-radius: 20px;
+    
+    box-shadow: 5px 5px 5px #eee;
+    
+    text-shadow:none;
+    margin-top: 4px;
+    }
+input[type = text],  input[type = password]{
+    font-family:"Segoe Print", Verdan, Arial;
+    -moz-border-radius:4px;
+    border:1px solid gray;
+    border-radius:4px;
+    padding-left:8px;
+    margin-top: 4px;
+}
+

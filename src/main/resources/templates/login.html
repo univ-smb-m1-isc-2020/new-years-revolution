@@ -1,21 +1,25 @@
 <!DOCTYPE HTML>
-<html>
-<head></head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Years Revolution</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
+</head>
 <body>
-<h1>Login</h1>
-<form name='f' action="perform_login" method='POST'>
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value='' placeholder='Username'></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' placeholder='Password' /></td>
-        </tr>
-        <tr>
-            <td><input name="submit" type="submit" value="Login" /></td>
-        </tr>
-    </table>
-</form>
+    <h1>Bienvenue sur New Years Revolution</h1>
+    <h2>Connectez-vous à votre compte</h2>
+
+    <div id="errors" th:if="${(param.error != null) and (param.error[0] == 'bad_login')}">
+        Erreur: Identifiant ou mot de passe incorrect
+    </div>
+
+
+    <form name='login' action="perform_login" method='POST'>
+        <input type="text" id="ndc" name="username" placeholder="Nom de Compte"> <br>
+        <input type="password" id="pass" name="password" placeholder="Mot de Passe"><br>
+        <input type="submit" id="envoi" value="Connexion">
+    </form>
+    <br>
+    <a th:href="@{/}">Pas de compte ?</a><br>
+    <a th:href="@{/login}">Mot de passe oublié ?</a>
 </body>
+</html>
