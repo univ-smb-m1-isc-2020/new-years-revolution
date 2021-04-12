@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -18,6 +18,8 @@ import java.util.*;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private AccountRepository accountRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     public CustomAuthenticationProvider(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -34,7 +36,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         if (acc != null /* Account exists */
                 && acc.getLogin().equals(username) /* Username match */
-                && new BCryptPasswordEncoder().matches(password, acc.getPassword()) /* Password match */
+                && passwordEncoder.matches(password, acc.getPassword()) /* Password match */
         ) {
             /* Give expected authority */
             ArrayList<GrantedAuthority> authorities = new ArrayList<>();
@@ -51,5 +53,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> auth) {
         return auth.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+    // Set the password encoder from the security configuration
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 }

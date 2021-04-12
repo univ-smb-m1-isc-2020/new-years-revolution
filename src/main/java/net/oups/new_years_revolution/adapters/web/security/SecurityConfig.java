@@ -21,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        customAuth.setPasswordEncoder(passwordEncoder());
         auth.authenticationProvider(customAuth);
                 //.inMemoryAuthentication()
                 //.withUser("newyearsrevolution").password(passwordEncoder().encode("LaPazRevolution")).roles("ADMIN");

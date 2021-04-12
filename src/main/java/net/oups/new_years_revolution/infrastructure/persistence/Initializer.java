@@ -1,5 +1,6 @@
 package net.oups.new_years_revolution.infrastructure.persistence;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -9,18 +10,20 @@ public class Initializer {
 
         private final AccountRepository accountRepository;
         private final ResolutionRepository resolutionRepository;
+        private final PasswordEncoder passwordEncoder;
 
-        public Initializer(AccountRepository accountRepository, ResolutionRepository resolutionRepository) {
+        public Initializer(AccountRepository accountRepository, ResolutionRepository resolutionRepository, PasswordEncoder passwordEncoder) {
             this.accountRepository = accountRepository;
             this.resolutionRepository = resolutionRepository;
+            this.passwordEncoder = passwordEncoder;
         }
 
         @PostConstruct
         public void initialize() {
             // Définition des comptes par défaut
             if (accountRepository.findAll().isEmpty()) {
-                accountRepository.saveAndFlush(new Account("admin", "passwordAdmin", "ADMIN"));
-                accountRepository.saveAndFlush(new Account("user", "passwordUser", "USER"));
+                accountRepository.saveAndFlush(new Account("admin", passwordEncoder.encode("admin12345"), "ADMIN"));
+                accountRepository.saveAndFlush(new Account("user", passwordEncoder.encode("user12345"), "USER"));
             }
 
             // Définition des résolutions par défaut

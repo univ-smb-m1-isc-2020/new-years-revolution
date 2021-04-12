@@ -1,8 +1,5 @@
 package net.oups.new_years_revolution.infrastructure.persistence;
 
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +25,7 @@ public class Account {
 
     public Account(String login, String password, String role) {
         this.login = login;
-        this.password = new BCryptPasswordEncoder().encode(password);
+        this.password = password;
         this.role = role;
     }
 
