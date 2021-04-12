@@ -4,6 +4,21 @@ body{
     margin-top: 10%;
     
 }
+
+#error{
+    margin: 8px 0px;
+    padding: 8px;
+
+    background-color: #a52e2e;
+}
+
+#logout{
+    margin: 8px 0px;
+    padding: 8px;
+
+    background-color: limegreen;
+}
+
 input[type = submit] {
 
     background:rgba(245, 156, 115);
@@ -18,7 +33,7 @@ input[type = submit] {
     
     text-shadow:none;
     margin-top: 4px;
-    }
+}
     
 input[type = submit]:hover {
     

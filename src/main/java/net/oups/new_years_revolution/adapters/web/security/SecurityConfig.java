@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=bad_login")
                 .and()
                 .logout().deleteCookies("remove").invalidateHttpSession(false)
-                .logoutUrl("/logout").logoutSuccessUrl("/");
+                .logoutUrl("/logout").logoutSuccessUrl("/login?logout");
     }
 
     @Bean

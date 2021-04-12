@@ -8,13 +8,17 @@
     <h1>Bienvenue sur New Years Revolution</h1>
     <h2>Connectez-vous à votre compte</h2>
 
-    <div id="errors" th:if="${(param.error != null) and (param.error[0] == 'bad_login')}">
-        Erreur: Identifiant ou mot de passe incorrect
+    <div id="error" th:if="${(param.error != null) and (param.error[0] == 'bad_login')}">
+        Erreur : Identifiant ou mot de passe incorrect.
+    </div>
+
+    <div id="logout" th:if="${(param.logout != null)}">
+        Information : Vous avez été déconnecté.
     </div>
 
 
     <form name='login' action="perform_login" method='POST'>
-        <input type="text" id="ndc" name="username" placeholder="Nom de Compte"> <br>
+        <input type="text" id="ndc" name="username" placeholder="Identifiant"> <br>
         <input type="password" id="pass" name="password" placeholder="Mot de Passe"><br>
         <input type="submit" id="envoi" value="Connexion">
     </form>
