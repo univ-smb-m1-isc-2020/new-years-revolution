@@ -17,13 +17,13 @@ public class Account {
 
     private String password;
 
-    private String role;
+    private AccountRole role;
 
     public Account() {
         // JPA
     }
 
-    public Account(String login, String password, String role) {
+    public Account(String login, String password, AccountRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -53,11 +53,11 @@ public class Account {
         this.password = password;
     }
 
-    public String getRole() {
+    public AccountRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(AccountRole role) {
         this.role = role;
     }
 }

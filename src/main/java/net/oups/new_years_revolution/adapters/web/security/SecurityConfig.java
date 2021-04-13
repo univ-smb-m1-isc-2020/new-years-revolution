@@ -1,5 +1,6 @@
 package net.oups.new_years_revolution.adapters.web.security;
 
+import net.oups.new_years_revolution.infrastructure.persistence.AccountRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/dashboard/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/admin/**").hasAuthority(AccountRole.ROLE_ADMIN.name())
+                .antMatchers("/dashboard/**").hasAnyAuthority(AccountRole.ROLE_ADMIN.name(), AccountRole.ROLE_USER.name())
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

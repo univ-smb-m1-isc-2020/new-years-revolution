@@ -16,6 +16,10 @@
         Information : Vous avez été déconnecté.
     </div>
 
+    <div id="register" th:if="${(registerLogin != null)}" th:utext="'Information : Votre compte &lt;strong&gt;' + ${registerLogin} + '&lt;/strong&gt; a bien été créé. Vous pouvez maintenant vous y connecter.'">
+        Inscription
+    </div>
+
 
     <form name='login' action="perform_login" method='POST'>
         <input type="text" id="ndc" name="username" placeholder="Identifiant"> <br>

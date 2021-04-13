@@ -22,8 +22,8 @@ public class Initializer {
         public void initialize() {
             // Définition des comptes par défaut
             if (accountRepository.findAll().isEmpty()) {
-                accountRepository.saveAndFlush(new Account("admin", passwordEncoder.encode("admin12345"), "ADMIN"));
-                accountRepository.saveAndFlush(new Account("user", passwordEncoder.encode("user12345"), "USER"));
+                accountRepository.saveAndFlush(new Account("admin", passwordEncoder.encode("admin12345"), AccountRole.ROLE_ADMIN));
+                accountRepository.saveAndFlush(new Account("user", passwordEncoder.encode("user12345"), AccountRole.ROLE_USER));
             }
 
             // Définition des résolutions par défaut
