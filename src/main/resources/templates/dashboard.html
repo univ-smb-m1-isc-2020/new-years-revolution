@@ -7,8 +7,11 @@
 </head>
 <body>
 <h1>
-    New years Revolution
+    New Years Revolution
 </h1>
+<div id="resoCree" th:if="${(resolutionCree != null)}" th:utext="'Information : Votre nouevlle résolution &lt;strong&gt;' + ${resolutionCree} + '&lt;/strong&gt; a bien été créée.'">
+    Inscription
+</div>
 <div>
 <p>Vos résolutions</p>
 <table>

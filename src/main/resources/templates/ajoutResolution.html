@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>
-    ajouter une resolution
-</title>
+    <title>Ajouter une résolution</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form method="post" target="">
-    <input type="text"> 
-    <input type="number">
-    <input type="checkbox" placeholder="Par semaines">par semaines
-    <input type="submit">
+    <form action="/dashboard/creationResolution" th:object="${resolution}" method="POST" enctype="utf8">
+        <p th:if="${error != null}"
+           th:text="${error}">Erreur</p>
+        <div>
+            <label>Résolution à prendre</label>
+            <input th:field="*{contenu}" />
+        </div>
 
-</form>
+        <div>
+            <label>Nombre de fois</label>
+            <input type="number" th:field="*{occurence}">
+        </div>
+        <div>
+            <label>Par semaine ?</label>
+            <input type="checkbox" th:field="*{periode}" placeholder="Décoché = par jour; Coché = par semaine"/>
+        </div>
+
+        <input type="submit">Créer une résolution</input>
+
+    </form>
 </body>
     
 </html>

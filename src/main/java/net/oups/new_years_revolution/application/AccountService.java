@@ -1,6 +1,7 @@
 package net.oups.new_years_revolution.application;
 
 import net.oups.new_years_revolution.infrastructure.exceptions.AccountAlreadyExistsException;
+import net.oups.new_years_revolution.infrastructure.exceptions.AccountDoesNotExistException;
 import net.oups.new_years_revolution.infrastructure.exceptions.AccountPasswordNotMatchException;
 import net.oups.new_years_revolution.infrastructure.persistence.Account;
 import net.oups.new_years_revolution.infrastructure.dto.AccountDTO;
@@ -20,10 +21,10 @@ public class AccountService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Account getAccountByLogin(String login) throws Exception {
+    public Account getAccountByLogin(String login) throws AccountDoesNotExistException {
         Account user = repository.findByLogin(login);
         if (user == null) {
-            throw new Exception("User \"" + login + "\" does not exist.");
+            throw new AccountDoesNotExistException("User \"" + login + "\" does not exist.");
         }
         return user;
     }
