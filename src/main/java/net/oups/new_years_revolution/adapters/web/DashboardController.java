@@ -38,7 +38,6 @@ public class DashboardController {
         List<Resolution> listRandomResolutions = resolutionService.randomResolutions(5);
 
         // Si on a créé une nouvelle résolution
-        System.out.println(model.containsAttribute("resolutionCree"));
         if (model.containsAttribute("resolutionCree")) {
             dashboard.addObject("resolutionCree", model.getAttribute("resolutionCree").toString());
         }
@@ -55,7 +54,6 @@ public class DashboardController {
         ajoutResolution.addObject("resolution", resolutionDTO);
 
         // Si on a eu une erreur
-        System.out.println(model.containsAttribute("error"));
         if (model.containsAttribute("error")) {
             ajoutResolution.addObject("error", model.getAttribute("error").toString());
         }
