@@ -29,7 +29,7 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard/")
-    public ModelAndView showDefaultDashboard(Model model, @RequestParam String resolutionCree) {
+    public ModelAndView showDefaultDashboard(Model model, @RequestParam(required = false) String resolutionCree) {
         ModelAndView dashboard = new ModelAndView("dashboard");
 
         List<Resolution> listRandomResolutions = resolutionService.randomResolutions(5);
@@ -44,7 +44,7 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard/create")
-    public ModelAndView createNewResolution(Model model, @RequestParam String error) {
+    public ModelAndView createNewResolution(Model model, @RequestParam(required = false) String error) {
         ModelAndView ajoutResolution = new ModelAndView("ajoutResolution");
         ResolutionDTO resolutionDTO = new ResolutionDTO();
 
