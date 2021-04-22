@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ResolutionService {
@@ -35,6 +36,18 @@ public class ResolutionService {
     }
 
     public List<Resolution> randomResolutions(int nbRandomRes) {
-        return repository.findAll();
+        List<Resolution> temp = repository.findAll();
+        int[] rando = new int[nbRandomRes];
+        for(int i=0;i<nbRandomRes;i++){
+            rando[i]= (int)(Math.random() * ((temp.size()) + 1));
+        }
+        //pour avoir une liste qui existe
+        List<Resolution> tempTemp = temp;
+        tempTemp.clear();
+        //pas de test de doublon
+        for(int i=0;i<nbRandomRes;i++){
+            tempTemp.add(temp.get(rando[i]));
+        }
+        return tempTemp;
     }
 }
