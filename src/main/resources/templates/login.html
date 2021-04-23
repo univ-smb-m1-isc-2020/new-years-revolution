@@ -22,12 +22,12 @@
 
 
     <form name='login' action="perform_login" method='POST'>
-        <input type="text" id="ndc" name="username" placeholder="Identifiant"> <br>
-        <input type="password" id="pass" name="password" placeholder="Mot de Passe"><br>
+        <input type="text" id="ndc" name="username" required placeholder="Identifiant"> <br>
+        <input type="password" id="pass" name="password" required placeholder="Mot de Passe"><br>
         <input type="submit" id="envoi" value="Connexion">
     </form>
     <br>
-    <a th:href="@{/}">Pas de compte ?</a><br>
+    <a th:href="@{/register}">Pas de compte ?</a><br>
     <a th:href="@{/login}">Mot de passe oublié ?</a>
 </body>
 </html>
