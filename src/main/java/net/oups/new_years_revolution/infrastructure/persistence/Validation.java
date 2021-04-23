@@ -7,18 +7,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@IdClass(ValidationCompositeKey.class)
 public class Validation {
 
     @Id
-    @OneToOne
-    private Resolution resolution;
+    @GeneratedValue
+    private Long id;
 
-    @Id
     @OneToOne
     private Account creator;
 
-    @Id
+    @OneToOne
+    private Resolution resolution;
+
     @Temporal(TemporalType.DATE)
     private Date date;
 
@@ -30,11 +30,20 @@ public class Validation {
         // JPA
     }
 
-    public Validation(Resolution resolution, Account creator, Date date, Integer occurence) {
-        this.resolution = resolution;
+    public Validation(Account creator, Resolution resolution, Date date, Integer occurence) {
         this.creator = creator;
+        this.resolution = resolution;
         this.date = date;
         this.occurence = occurence;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Resolution getResolution() {

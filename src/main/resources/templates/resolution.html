@@ -9,17 +9,39 @@
         <h3 th:utext="'Par ' + ${resolution.getCreator().getLogin()}">Créateur</h3>
         <h3 th:utext="'À faire ' + ${resolution.getOccurence()} + ' fois par ' + ${resolution.getPeriode() == 0 ? 'jour' : 'semaine'}">Occurence</h3>
 
-        <p>TODO: Afficher les dernières validations</p>
+        <div id="error" th:if="${(error != null)}" th:text="${error}">
+            Erreur
+        </div>
+
+        <div id="success" th:if="${(success != null)}" th:text="${success}">
+            Succès
+        </div>
+
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Occurences</th>
+            </tr>
+            <tr th:each="validation : ${validationsList}">
+                <td><span th:text="${#dates.format(validation.getDate(), 'dd/MM/yyyy')}">Date</span></td>
+                <td><span th:text="${validation.getOccurence()}">Occurences</span></td>
+            </tr>
+        </table>
 
         <div th:if="${isMyResolution}">
-            <p>Actions pour l'utilisateur :</p>
-            <p>TODO: Validation</p>
-            <form method="POST" target="">
-                <input type="checkbox" name="validate" >
-                <label for="validate">j'ai effectué cette resolution</label><br/>
-                <input type="submit">
+            <p>Validation :</p>
+            <form th:act="'/dashboard/resolution/' + ${resolution.getId()}" th:object="${validationDTO}" method="POST" enctype="utf8">
+                <div>
+                    <label>Nombre de fois</label>
+                    <input type="number" required th:field="*{occurence}">
+                </div>
+                <div>
+                    <label>Date</label>
+                    <input type="date" required th:field="*{date}">
+                </div>
+                <input type="submit" value="Valider la résolution" />
             </form>
         </div>
-    
+
     </body>
 </html>
