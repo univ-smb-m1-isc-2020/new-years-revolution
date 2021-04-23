@@ -28,8 +28,8 @@ public class DashboardController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/dashboard/")
-    public ModelAndView showDefaultDashboard(Model model, @RequestParam(required = false) String resolutionCree) {
+    @GetMapping({"/dashboard", "/dashboard/"})
+    public ModelAndView showDefaultDashboard(Model model, @RequestParam(required = false) String resolutionCree, @RequestParam(required = false) String error) {
         ModelAndView dashboard = new ModelAndView("dashboard");
 
         List<Resolution> listRandomResolutions = resolutionService.randomResolutions(5);
@@ -37,6 +37,11 @@ public class DashboardController {
         // Si on a créé une nouvelle résolution
         if (resolutionCree != null) {
             dashboard.addObject("resolutionCree", resolutionCree);
+        }
+
+        // Si on a eu une erreur
+        if (error != null) {
+            dashboard.addObject("error", error);
         }
 
         dashboard.addObject("resolutionsList", listRandomResolutions);
@@ -69,5 +74,24 @@ public class DashboardController {
             return new ModelAndView("redirect:/dashboard/create", "error", "Erreur : Votre compte n'a pas été trouvé. Veuillez vous déconnecter et vous reconnecter.");
         }
 
+    }
+
+    @GetMapping("/dashboard/resolution/{resId}")
+    public ModelAndView showResolutionById(Model model, @PathVariable(value = "resId") String resId) {
+        ModelAndView modelAndViewRes = new ModelAndView("resolution");
+        Resolution resolution = resolutionService.getResolutionById(Long.parseLong(resId));
+
+        // Si la résolution n'existe pas
+        if (resolution == null) {
+            return new ModelAndView("redirect:/dashboard/", "error", "Erreur : La résolution n°" + resId + " n'existe pas.");
+        }
+
+        if (SecurityContextHolder.getContext().getAuthentication().getName().equals(resolution.getCreator().getLogin())) {
+            modelAndViewRes.addObject("isMyResolution", true);
+        }
+
+        modelAndViewRes.addObject("resolution", resolution);
+
+        return modelAndViewRes;
     }
 }

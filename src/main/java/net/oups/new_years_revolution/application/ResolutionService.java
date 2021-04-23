@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -32,8 +33,13 @@ public class ResolutionService {
         return newRes;
     }
 
-    public List<Resolution> locations() {
-        return repository.findAll();
+    public Resolution getResolutionById(Long id) {
+        Optional<Resolution> res = repository.findById(id);
+        if (res.isPresent()) {
+            return res.get();
+        } else {
+            return null;
+        }
     }
 
     public List<Resolution> randomResolutions(int nbRandomRes) {

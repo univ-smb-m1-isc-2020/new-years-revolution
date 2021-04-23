@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+        <title th:utext="'Résolution de ' + ${resolution.getCreator().getLogin()} + ' : ' + ${resolution.getContenu()}">Résolution</title>
+    </head>
+    <body>
+        <h2 th:utext="${resolution.getContenu()}">Résolution</h2>
+        <h3 th:utext="'Par ' + ${resolution.getCreator().getLogin()}">Créateur</h3>
+        <h3 th:utext="'À faire ' + ${resolution.getOccurence()} + ' fois par ' + ${resolution.getPeriode() == 0 ? 'jour' : 'semaine'}">Occurence</h3>
+
+        <p>TODO: Afficher les dernières validations</p>
+
+        <div th:if="${isMyResolution}">
+            <p>Actions pour l'utilisateur :</p>
+            <p>TODO: Validation</p>
+            <form method="POST" target="">
+                <input type="checkbox" name="validate" >
+                <label for="validate">j'ai effectué cette resolution</label><br/>
+                <input type="submit">
+            </form>
+        </div>
+    
+    </body>
+</html>

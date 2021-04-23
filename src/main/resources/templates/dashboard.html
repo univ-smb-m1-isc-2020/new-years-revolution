@@ -9,9 +9,15 @@
 <h1>
     New Years Revolution
 </h1>
+
 <div id="resoCree" th:if="${(resolutionCree != null)}" th:utext="'Information : Votre nouvelle résolution &lt;strong&gt;' + ${resolutionCree} + '&lt;/strong&gt; a bien été créée.'">
-    Inscription
+    Nouvelle résolution
 </div>
+
+<div id="error" th:if="${(error != null)}" th:text="${error}">
+    Erreur
+</div>
+
 <div>
 <p>Vos résolutions</p>
 <table>
@@ -79,7 +85,7 @@
             <th>Auteur</th>
         </tr>
         <tr th:each="resolution : ${resolutionsList}">
-            <td><span th:text="${resolution.getContenu()}"> Contenu </span></td>
+            <td><a th:href="'/dashboard/resolution/'+${resolution.getId()}"><span th:text="${resolution.getContenu()}"> Contenu </span></a></td>
             <td><span th:text="${resolution.getCreator().getLogin()}"> Auteur </span></td>
         </tr>
     </table>

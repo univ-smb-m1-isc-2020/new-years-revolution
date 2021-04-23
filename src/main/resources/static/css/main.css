@@ -5,7 +5,12 @@ body{
     
 }
 
+#error{
+    margin: 8px 0px;
+    padding: 8px;
 
+    background-color: #a52e2e;
+}
 
 table {
     border: medium solid rgba(245, 156, 115);
