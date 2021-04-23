@@ -9,6 +9,7 @@ import net.oups.new_years_revolution.infrastructure.persistence.ResolutionReposi
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -37,17 +38,21 @@ public class ResolutionService {
 
     public List<Resolution> randomResolutions(int nbRandomRes) {
         List<Resolution> temp = repository.findAll();
-        int[] rando = new int[nbRandomRes];
-        for(int i=0;i<nbRandomRes;i++){
-            rando[i]= (int)(Math.random() * ((temp.size()) + 1));
+        int tempSize = temp.size();
+        List<Resolution> resultList = new ArrayList<>();
+
+        for(int i = 0; i < nbRandomRes; i++){
+            // On itère x fois dans la liste pour vérifier que l'on ajoute pas deux fois la même résolution.
+            // Si au bout de 10 essais nous n'avons pas de résolution unique, on saute l'ajout.
+            for (int randCount = 0; randCount < 10; randCount++) {
+                int randNb = (int)(Math.random() * tempSize);
+                // Si l'entrée est unique, on l'ajoute à la resultList et on sort de la boucle
+                if (!resultList.contains(temp.get(randNb))) {
+                    resultList.add(temp.get(randNb));
+                    break;
+                }
+            }
         }
-        //pour avoir une liste qui existe
-        List<Resolution> tempTemp = temp;
-        tempTemp.clear();
-        //pas de test de doublon
-        for(int i=0;i<nbRandomRes;i++){
-            tempTemp.add(temp.get(rando[i]));
-        }
-        return tempTemp;
+        return resultList;
     }
 }
