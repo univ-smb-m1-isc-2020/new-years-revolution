@@ -22,25 +22,42 @@
 
 <div>
 <p>Vos résolutions</p>
-<table>
-    <tr>
-        <th>Ma résolution</th>
-        <th>prise le</th>
-        <th>Tenu</th>
-    </tr>
-        <tr th:if="${mesInscriptionsList.size() == 0}">
-            <td colspan="3"><span>Aucune résolution à afficher. Voulez-vous en <a href="/dashboard/create">créer une nouvelle</a> ?</span></td>
+    <table>
+        <tr>
+            <th>Ma résolution</th>
+            <th>prise le</th>
+            <th>Tenu</th>
         </tr>
-        <tr th:each="inscription : ${mesInscriptionsList}">
-            <td><a th:href="'/dashboard/resolution/'+${inscription.getResolution().getId()}"><span th:text="${inscription.getResolution().getContenu()}"> Contenu </span></a></td>
-            <td><span th:text="${#dates.format(inscription.getDateInscription(), 'dd/MM/yyyy')}"> Date </span></td>
-            <td><span>TODO</span></td>
-        </tr>
-</table>
+            <tr th:if="${mesInscriptionsList.size() == 0}">
+                <td colspan="3"><span>Aucune résolution à afficher. Voulez-vous en <a href="/dashboard/create">créer une nouvelle</a> ?</span></td>
+            </tr>
+            <tr th:each="inscription : ${mesInscriptionsList}">
+                <td><a th:href="'/dashboard/resolution/'+${inscription.getResolution().getId()}"><span th:text="${inscription.getResolution().getContenu()}"> Contenu </span></a></td>
+                <td><span th:text="${#dates.format(inscription.getDateInscription(), 'dd/MM/yyyy')}"> Date </span></td>
+                <td><span>TODO</span></td>
+            </tr>
+    </table>
 </div>
 
 <div>
     <p>Les résolutions les plus prises</p>
+    <table>
+        <tr>
+            <th>Résolution</th>
+            <th>Nombre d'abonnés</th>
+        </tr>
+        <tr th:if="${resolutionsPopulairesList.size() == 0}">
+            <td colspan="2"><span>Aucune résolution populaire à afficher.</span></td>
+        </tr>
+        <tr th:each="resolutionCount : ${resolutionsPopulairesList}">
+            <td><a th:href="'/dashboard/resolution/'+${resolutionCount.getResolution().getId()}"><span th:text="${resolutionCount.getResolution().getContenu()}"> Contenu </span></a></td>
+            <td><span th:text="${resolutionCount.getCount()}">Nombre d'abonnés</span></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <p>Les plus tenus</p>
     <table>
         <tr>
             <th>Ma résolution</th>
@@ -52,33 +69,17 @@
             <td>06/04/2021</td>
             <td>non</td>
         </tr>
+        <tr>
+            <td>Finir le projet</td>
+            <td>06/04/2021</td>
+            <td>en cours</td>
+        </tr>
+        <tr>
+            <td>Taper une barre</td>
+            <td>04/06/2021</td>
+            <td>oui</td>
+        </tr>
     </table>
-</div>
-
-<div>
-        <p>Les plus tenus</p>
-        <table>
-            <tr>
-                <th>Ma résolution</th>
-                <th>prise le</th>
-                <th>Tenu</th>
-            </tr>
-            <tr>
-                <td>Je mange des bananes</td>
-                <td>06/04/2021</td>
-                <td>non</td>
-            </tr>
-            <tr>
-                <td>Finir le projet</td>
-                <td>06/04/2021</td>
-                <td>en cours</td>
-            </tr>
-            <tr>
-                <td>Taper une barre</td>
-                <td>04/06/2021</td>
-                <td>oui</td>
-            </tr>
-        </table>
 </div>
 
 <div>

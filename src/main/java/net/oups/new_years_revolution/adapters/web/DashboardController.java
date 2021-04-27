@@ -6,7 +6,6 @@ import net.oups.new_years_revolution.application.ResolutionService;
 import net.oups.new_years_revolution.application.ValidationService;
 import net.oups.new_years_revolution.infrastructure.exceptions.AccountDoesNotExistException;
 import net.oups.new_years_revolution.infrastructure.persistence.Account;
-import net.oups.new_years_revolution.infrastructure.persistence.Inscription;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +41,9 @@ public class DashboardController {
 
         // Mes résolutions
         dashboard.addObject("mesInscriptionsList", inscriptionService.getInscriptionsForAccount(account));
+
+        // Résolutions les plus prises
+        dashboard.addObject("resolutionsPopulairesList", inscriptionService.getResolutionsCount(5));
 
         // Résolutions aléatoires
         dashboard.addObject("randomResolutionsList", resolutionService.randomResolutions(5));
