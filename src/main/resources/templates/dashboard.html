@@ -26,11 +26,14 @@
         <th>prise le</th>
         <th>Tenu</th>
     </tr>
-    <tr>
-        <td>Je mange des bananes</td>
-        <td>06/04/2021</td>
-        <td>non</td>
-    </tr>
+        <tr th:if="${mesInscriptionsList.size() == 0}">
+            <td colspan="3"><span>Aucune résolution à afficher. Voulez-vous en <a href="/dashboard/create">créer une nouvelle</a> ?</span></td>
+        </tr>
+        <tr th:each="inscription : ${mesInscriptionsList}">
+            <td><a th:href="'/dashboard/resolution/'+${inscription.getResolution().getId()}"><span th:text="${inscription.getResolution().getContenu()}"> Contenu </span></a></td>
+            <td><span th:text="${#dates.format(inscription.getDateInscription(), 'dd/MM/yyyy')}"> Date </span></td>
+            <td><span>TODO</span></td>
+        </tr>
 </table>
 </div>
 
@@ -84,7 +87,10 @@
             <th>Contenu</th>
             <th>Auteur</th>
         </tr>
-        <tr th:each="resolution : ${resolutionsList}">
+        <tr th:if="${randomResolutionsList.size() == 0}">
+            <td colspan="2"><span>Aucune résolution à afficher.</span></td>
+        </tr>
+        <tr th:each="resolution : ${randomResolutionsList}">
             <td><a th:href="'/dashboard/resolution/'+${resolution.getId()}"><span th:text="${resolution.getContenu()}"> Contenu </span></a></td>
             <td><span th:text="${resolution.getCreator().getLogin()}"> Auteur </span></td>
         </tr>

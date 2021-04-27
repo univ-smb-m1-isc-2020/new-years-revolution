@@ -29,22 +29,12 @@ public class InscriptionService {
         return newIns;
     }
 
-    public ArrayList<Resolution> getAccountResolutions(Account account) {
-        ArrayList<Resolution> resolutions = new ArrayList<>();
-        List<Inscription> inscrits = repository.findByInscritId(account.getId());
-        for (Inscription inscrit : inscrits) {
-            resolutions.add(inscrit.getResolution());
-        }
-        return resolutions;
+    public List<Inscription> getInscriptionsForAccount(Account account) {
+        return repository.findByInscritId(account.getId());
     }
 
-    public ArrayList<Account> getResolutionInscrits(Resolution resolution) {
-        ArrayList<Account> accounts = new ArrayList<>();
-        List<Inscription> inscrits = repository.findByResolutionId(resolution.getId());
-        for (Inscription inscrit : inscrits) {
-            accounts.add(inscrit.getInscrit());
-        }
-        return accounts;
+    public List<Inscription> getInscritsForResolution(Resolution resolution) {
+        return repository.findByResolutionId(resolution.getId());
     }
 
     public Inscription getInscriptionForAccountAndResolution(Account account, Resolution resolution) {

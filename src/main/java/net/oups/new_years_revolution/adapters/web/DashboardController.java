@@ -4,24 +4,13 @@ import net.oups.new_years_revolution.application.AccountService;
 import net.oups.new_years_revolution.application.InscriptionService;
 import net.oups.new_years_revolution.application.ResolutionService;
 import net.oups.new_years_revolution.application.ValidationService;
-import net.oups.new_years_revolution.infrastructure.dto.ResolutionDTO;
-import net.oups.new_years_revolution.infrastructure.dto.ValidationDTO;
 import net.oups.new_years_revolution.infrastructure.exceptions.AccountDoesNotExistException;
 import net.oups.new_years_revolution.infrastructure.persistence.Account;
 import net.oups.new_years_revolution.infrastructure.persistence.Inscription;
-import net.oups.new_years_revolution.infrastructure.persistence.Resolution;
-import net.oups.new_years_revolution.infrastructure.persistence.Validation;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 @RestController
 public class DashboardController {
@@ -43,7 +32,19 @@ public class DashboardController {
     public ModelAndView showDefaultDashboard(Model model, @RequestParam(required = false) String resolutionCree, @RequestParam(required = false) String error) {
         ModelAndView dashboard = new ModelAndView("dashboard");
 
-        List<Resolution> listRandomResolutions = resolutionService.randomResolutions(5);
+        Account account;
+        try {
+            account = accountService.getAccountByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        } catch (AccountDoesNotExistException e) {
+            // On est connectés à un compte qui n'existe pas, on le déconnecte
+            return new ModelAndView("redirect:/logout");
+        }
+
+        // Mes résolutions
+        dashboard.addObject("mesInscriptionsList", inscriptionService.getInscriptionsForAccount(account));
+
+        // Résolutions aléatoires
+        dashboard.addObject("randomResolutionsList", resolutionService.randomResolutions(5));
 
         // Si on a créé une nouvelle résolution
         if (resolutionCree != null) {
@@ -55,7 +56,6 @@ public class DashboardController {
             dashboard.addObject("error", error);
         }
 
-        dashboard.addObject("resolutionsList", listRandomResolutions);
         return dashboard;
     }
 }
