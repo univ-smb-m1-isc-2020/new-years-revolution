@@ -4,12 +4,20 @@
         <link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" >
     </head>
     <body>
-        <div class="header">
+        <div class="header authenticated" sec:authorize="isAuthenticated()">
             <p>Bonjour, <span sec:authentication="name">Login</span></p>
             <nav>
                 <a href="/dashboard">Dashboard</a>
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="/admin">Page administrateur</a>
                 <a href="/dashboard/create">Ajouter une resolution</a>
                 <a href="/logout">Déconnexion</a>
+            </nav>
+        </div>
+        <div class="header authenticated" sec:authorize="!isAuthenticated()">
+            <p>Bonjour, <span>Anonyme</span></p>
+            <nav>
+                <a href="/login">Connexion</a>
+                <a href="/register">Créer un compte</a>
             </nav>
         </div>
     </body>
