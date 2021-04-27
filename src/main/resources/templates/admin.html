@@ -8,7 +8,11 @@
     <title>Admin page</title>
 </head>
 <body>
+<div th:replace="fragments/header">...</div>
+
 <h1 th:text="${title}">Titre</h1>
 <img src="https://media3.giphy.com/media/Nx0rz3jtxtEre/200.gif" alt="Hello There GIF">
+
+<div th:replace="fragments/footer">...</div>
 </body>
 </html>

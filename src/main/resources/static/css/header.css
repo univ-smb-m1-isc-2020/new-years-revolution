@@ -1,0 +1,12 @@
+.header {
+    background-color: slategrey;
+    margin: 0px;
+}
+
+.header nav{
+    text-align: center;
+}
+
+.header a{
+    margin-right: 20%;
+}

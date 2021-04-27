@@ -5,6 +5,8 @@
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <div th:replace="fragments/header">...</div>
+
     <form action="/dashboard/creationResolution" th:object="${resolution}" method="POST" enctype="utf8">
         <p th:if="${error != null}"
            th:text="${error}">Erreur</p>
@@ -25,6 +27,8 @@
         <input type="submit" value="Créer une résolution" />
 
     </form>
+
+    <div th:replace="fragments/footer">...</div>
 </body>
     
 </html>

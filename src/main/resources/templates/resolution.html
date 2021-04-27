@@ -5,6 +5,8 @@
         <title th:utext="'Résolution de ' + ${resolution.getCreator().getLogin()} + ' : ' + ${resolution.getContenu()}">Résolution</title>
     </head>
     <body>
+        <div th:replace="fragments/header">...</div>
+
         <h2 th:utext="${resolution.getContenu()}">Résolution</h2>
         <h3 th:utext="'Par ' + ${resolution.getCreator().getLogin()}">Créateur</h3>
         <h3 th:utext="'À faire ' + ${resolution.getOccurence()} + ' fois par ' + ${resolution.getPeriode() == 0 ? 'jour' : 'semaine'}">Occurence</h3>
@@ -55,5 +57,6 @@
             </form>
         </div>
 
+        <div th:replace="fragments/footer">...</div>
     </body>
 </html>

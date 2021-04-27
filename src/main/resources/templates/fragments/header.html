@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" >
+    </head>
+    <body>
+        <div class="header">
+            <p>Bonjour, <span sec:authentication="name">Login</span></p>
+            <nav>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard/create">Ajouter une resolution</a>
+                <a href="/logout">Déconnexion</a>
+            </nav>
+        </div>
+    </body>
+</html>

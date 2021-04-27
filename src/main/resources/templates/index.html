@@ -9,9 +9,13 @@
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div th:replace="fragments/header">...</div>
+
 <h1>Hello there!</h1>
 <img src="https://media3.giphy.com/media/Nx0rz3jtxtEre/200.gif" alt="Hello There GIF">
 <h3>General Kenobi?</h3>
 <h4 th:text="${oui}">1</h4>
+
+<div th:replace="fragments/footer">...</div>
 </body>
 </html>

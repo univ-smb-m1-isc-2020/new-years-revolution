@@ -5,6 +5,8 @@
     <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <div th:replace="fragments/header">...</div>
+
     <h1>Bienvenue sur New Years Revolution</h1>
     <h2>Connectez-vous à votre compte</h2>
 
@@ -29,5 +31,7 @@
     <br>
     <a th:href="@{/register}">Pas de compte ?</a><br>
     <a th:href="@{/login}">Mot de passe oublié ?</a>
+
+    <div th:replace="fragments/footer">...</div>
 </body>
 </html>
