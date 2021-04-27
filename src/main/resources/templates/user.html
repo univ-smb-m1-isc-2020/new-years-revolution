@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+        <title th:utext="'Compte de ' + ${username}">Compte utilisateur</title>
+    </head>
+    <body th:if="${accountNotExists}">
+        <div th:replace="fragments/header">...</div>
+
+        <h2 th:utext="'Le compte &lt;strong&gt;' + ${username} + '&lt;/strong&gt; n\'existe pas.'">Compte inexistant</h2>
+        <p><a href="/dashboard/">Retourner au dashboard</a></p>
+
+        <div th:replace="fragments/footer">...</div>
+    </body>
+
+    <body th:if="${!accountNotExists}">
+        <div th:replace="fragments/header">...</div>
+
+        <h2 th:utext="'Page utilisateur de ' + ${username}">Page utilisateur</h2>
+
+        <h3>Table des résolutions :</h3>
+        <table>
+            <tr>
+                <th>Résolution</th>
+                <th>Prise le</th>
+                <th>Tenu</th>
+            </tr>
+            <tr th:if="${inscriptionsList.size() == 0}">
+                <td colspan="3"><span th:utext="${username} + ' n\'a pas encore suivi de résolutions.'"></span></td>
+            </tr>
+            <tr th:each="inscription : ${inscriptionsList}">
+                <td><a th:href="'/dashboard/resolution/'+${inscription.getResolution().getId()}"><span th:text="${inscription.getResolution().getContenu()}"> Contenu </span></a></td>
+                <td><span th:text="${#dates.format(inscription.getDateInscription(), 'dd/MM/yyyy')}"> Date </span></td>
+                <td><span>TODO</span></td>
+            </tr>
+        </table>
+
+        <div th:replace="fragments/footer">...</div>
+    </body>
+</html>
