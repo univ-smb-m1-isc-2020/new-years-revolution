@@ -1,12 +1,14 @@
 package net.oups.new_years_revolution.adapters.web;
 
 import net.oups.new_years_revolution.application.AccountService;
+import net.oups.new_years_revolution.application.InscriptionService;
 import net.oups.new_years_revolution.application.ResolutionService;
 import net.oups.new_years_revolution.application.ValidationService;
 import net.oups.new_years_revolution.infrastructure.dto.ResolutionDTO;
 import net.oups.new_years_revolution.infrastructure.dto.ValidationDTO;
 import net.oups.new_years_revolution.infrastructure.exceptions.AccountDoesNotExistException;
 import net.oups.new_years_revolution.infrastructure.persistence.Account;
+import net.oups.new_years_revolution.infrastructure.persistence.Inscription;
 import net.oups.new_years_revolution.infrastructure.persistence.Resolution;
 import net.oups.new_years_revolution.infrastructure.persistence.Validation;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -29,11 +29,14 @@ public class DashboardController {
     private final ResolutionService resolutionService;
     private final AccountService accountService;
     private final ValidationService validationService;
+    private final InscriptionService inscriptionService;
 
-    public DashboardController(ResolutionService resolutionService, AccountService accountService, ValidationService validationService) {
+
+    public DashboardController(ResolutionService resolutionService, AccountService accountService, ValidationService validationService, InscriptionService inscriptionService) {
         this.resolutionService = resolutionService;
         this.accountService = accountService;
         this.validationService = validationService;
+        this.inscriptionService = inscriptionService;
     }
 
     @GetMapping({"/dashboard", "/dashboard/"})
@@ -77,6 +80,7 @@ public class DashboardController {
         try {
             Account account = accountService.getAccountByLogin(username);
             Resolution resolution = resolutionService.registerNewResolution(resolutionDTO, account);
+            Inscription inscription = inscriptionService.registerNewInscription(account, resolution, new Date());
             return new ModelAndView("redirect:/dashboard/", "resolutionCree", resolution.getContenu());
         } catch (AccountDoesNotExistException e) {
             return new ModelAndView("redirect:/dashboard/", "error", "Erreur : Le compte \"" + username + "\" n'existe pas.");
