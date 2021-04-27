@@ -8,6 +8,7 @@
         <h2 th:utext="${resolution.getContenu()}">Résolution</h2>
         <h3 th:utext="'Par ' + ${resolution.getCreator().getLogin()}">Créateur</h3>
         <h3 th:utext="'À faire ' + ${resolution.getOccurence()} + ' fois par ' + ${resolution.getPeriode() == 0 ? 'jour' : 'semaine'}">Occurence</h3>
+        <h3 th:if="${(inscriptionInfo != null)}" th:utext="'Vous êtes abonné à cette résolution depuis le ' + ${#dates.format(inscriptionInfo.getDateInscription(), 'dd/MM/yyyy')}">Date d'inscription</h3>
 
         <div id="error" th:if="${(error != null)}" th:text="${error}">
             Erreur
@@ -17,10 +18,13 @@
             Succès
         </div>
 
-        <table>
+        <table th:if="${isMyResolution}">
             <tr>
                 <th>Date</th>
                 <th>Occurences</th>
+            </tr>
+            <tr th:if="${validationsList.size() == 0}">
+                <td colspan="2">Aucune donnée disponible.</td>
             </tr>
             <tr th:each="validation : ${validationsList}">
                 <td><span th:text="${#dates.format(validation.getDate(), 'dd/MM/yyyy')}">Date</span></td>
@@ -28,9 +32,17 @@
             </tr>
         </table>
 
+        <div th:if="${shouldSubscribe}">
+            <p>Inscription :</p>
+            <form th:action="'/dashboard/resolution/' + ${resolution.getId()} + '/subscribe'" method="POST" enctype="utf8">
+                <p>Vous n'êtes pas abonné à cette résolution. Abonnez-vous et commencez à la suivre dès maintenant !</p>
+                <input type="submit" value="S'abonner" />
+            </form>
+        </div>
+
         <div th:if="${isMyResolution}">
             <p>Validation :</p>
-            <form th:act="'/dashboard/resolution/' + ${resolution.getId()}" th:object="${validationDTO}" method="POST" enctype="utf8">
+            <form th:action="'/dashboard/resolution/' + ${resolution.getId()} + '/validation'" th:object="${validationDTO}" method="POST" enctype="utf8">
                 <div>
                     <label>Nombre de fois</label>
                     <input type="number" required th:field="*{occurence}">

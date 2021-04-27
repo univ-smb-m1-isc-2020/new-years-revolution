@@ -20,6 +20,8 @@ public interface ValidationRepository extends JpaRepository<Validation, Long> {
 
     List<Validation> findByDate(Date date);
 
+    List<Validation> findByCreatorIdAndResolutionId(Long creatorId, Long resolutionId);
+
     Optional<Validation> findByCreatorIdAndResolutionIdAndDate(Long creatorId, Long resolutionId, Date date);
 
     List<Validation> findByResolutionIdAndDateBetween(Long resolutionId, Date now, Date sevenDaysBefore);

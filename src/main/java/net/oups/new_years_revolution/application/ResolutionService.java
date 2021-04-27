@@ -28,6 +28,7 @@ public class ResolutionService {
     public Resolution registerNewResolution(ResolutionDTO resolutionDTO, Account account) {
         Integer periode = (resolutionDTO.getPeriode() ? 1 : 0);
         Resolution newRes = new Resolution(resolutionDTO.getContenu(), resolutionDTO.getOccurence(), periode, account);
+        System.out.println("salut je m'inscris");
         repository.saveAndFlush(newRes);
 
         return newRes;

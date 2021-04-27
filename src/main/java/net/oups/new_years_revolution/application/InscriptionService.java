@@ -46,4 +46,13 @@ public class InscriptionService {
         }
         return accounts;
     }
+
+    public Inscription getInscriptionForAccountAndResolution(Account account, Resolution resolution) {
+        Optional<Inscription> val = repository.findByInscritIdAndResolutionId(account.getId(), resolution.getId());
+        if (val.isPresent()) {
+            return val.get();
+        } else {
+            return null;
+        }
+    }
 }

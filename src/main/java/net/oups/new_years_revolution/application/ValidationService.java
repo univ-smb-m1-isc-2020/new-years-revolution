@@ -35,6 +35,10 @@ public class ValidationService {
         return repository.findByCreatorId(account.getId());
     }
 
+    public List<Validation> getAllValidationsForAccountAndResolution(Account account, Resolution resolution) {
+        return repository.findByCreatorIdAndResolutionId(account.getId(), resolution.getId());
+    }
+
     public Validation getValidationByCreatorIdAndResolutionIdAndDate(Long creaId, Long resId, Date date) {
         Optional<Validation> val = repository.findByCreatorIdAndResolutionIdAndDate(creaId, resId, date);
         if (val.isPresent()) {
