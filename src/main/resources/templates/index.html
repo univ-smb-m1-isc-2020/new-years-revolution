@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -19,7 +19,12 @@
     </p>
 </div>
 <br>
-<div>
+
+<div sec:authorize="isAuthenticated()">
+    <p>Bonjour, <strong sec:authentication="name">Login</strong> ! Vous pouvez <a href="/dashboard">accéder à votre dashboard</a> ou <a href="/dashboard/user/me">accéder à votre page personnelle</a> !</p>
+</div>
+
+<div sec:authorize="!isAuthenticated()">
     <p><a href="/register">Créez gratuitement un compte sur New Years Revolution</a> et commencez votre suivi de bonnes résolutions dès aujourd'hui !</p>
     <p>Vous possédez déjà un compte ? <a href="/login">Connectez-vous !</a></p>
 </div>
