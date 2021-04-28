@@ -36,7 +36,7 @@ public class AccountService {
         if (repository.findByLogin(accountDTO.getLogin()) != null) {
             throw new AccountAlreadyExistsException("User \"" + accountDTO.getLogin() + "\" already exists.");
         }
-        if (!accountDTO.getPassword().matches(accountDTO.getPasswordMatch())) {
+        if (!accountDTO.getPassword().equals(accountDTO.getPasswordMatch())) {
             throw new AccountPasswordNotMatchException("Passwords do not match.");
         }
 
