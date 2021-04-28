@@ -62,6 +62,7 @@ public class UserController {
 
         // Si on arrive ici, alors le compte existe, on le signale
         modelAndViewUser.addObject("accountNotExists", false);
+        modelAndViewUser.addObject("account", account);
 
         // Liste des résolutions
         modelAndViewUser.addObject("inscriptionsList", inscriptionService.getInscriptionsForAccount(account));

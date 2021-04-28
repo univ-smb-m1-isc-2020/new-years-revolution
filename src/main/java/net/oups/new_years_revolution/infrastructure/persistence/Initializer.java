@@ -26,8 +26,8 @@ public class Initializer {
             if (accountRepository.findAll().isEmpty() && resolutionRepository.findAll().isEmpty() && inscriptionRepository.findAll().isEmpty()) {
 
                 // Valeurs par défaut
-                Account admin = new Account("admin", passwordEncoder.encode("admin12345"), AccountRole.ROLE_ADMIN);
-                Account user = new Account("user", passwordEncoder.encode("user12345"), AccountRole.ROLE_USER);
+                Account admin = new Account("admin", passwordEncoder.encode("admin12345"), AccountRole.ROLE_ADMIN, new Date());
+                Account user = new Account("user", passwordEncoder.encode("user12345"), AccountRole.ROLE_USER, new Date());
 
                 Resolution res1 = new Resolution("Je dois me coucher avant minuit au moins 5 fois par semaine", 5, 1, admin);
                 Resolution res2 = new Resolution("Je dois faire du sport 2 fois par semaine", 2, 1, admin);

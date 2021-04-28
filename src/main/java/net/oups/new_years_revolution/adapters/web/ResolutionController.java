@@ -172,8 +172,8 @@ public class ResolutionController {
         }
 
         // On refuse la validation si la date est inférieure à la date d'abonnement
-        if (validationDTO.getDate().compareTo(inscription.getDateInscription()) < 0) {
-            return new ModelAndView("redirect:/dashboard/resolution/"+resId, "error", "Erreur : Vous ne pouvez pas valider à une date inférieure au " + DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRENCH).format(inscription.getDateInscription()) + " (date d'abonnement à la résolution).");
+        if (validationDTO.getDate().compareTo(inscription.getDateAbonnement()) < 0) {
+            return new ModelAndView("redirect:/dashboard/resolution/"+resId, "error", "Erreur : Vous ne pouvez pas valider à une date inférieure au " + DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRENCH).format(inscription.getDateAbonnement()) + " (date d'abonnement à la résolution).");
         }
 
         // Création ou mise à jour de la validation

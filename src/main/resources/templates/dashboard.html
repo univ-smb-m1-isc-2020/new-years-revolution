@@ -33,7 +33,7 @@
         </tr>
         <tr th:each="inscription : ${mesInscriptionsList}">
             <td><a th:href="'/dashboard/resolution/'+${inscription.getResolution().getId()}"><span th:text="${inscription.getResolution().getContenu()}"> Contenu </span></a></td>
-            <td><span th:text="${#dates.format(inscription.getDateInscription(), 'dd/MM/yyyy')}"> Date </span></td>
+            <td><span th:text="${#dates.format(inscription.getDateAbonnement(), 'dd/MM/yyyy')}"> Date </span></td>
             <td><span>TODO</span></td>
         </tr>
     </table>

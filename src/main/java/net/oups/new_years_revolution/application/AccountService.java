@@ -10,6 +10,8 @@ import net.oups.new_years_revolution.infrastructure.persistence.AccountRole;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class AccountService {
     private final AccountRepository repository;
@@ -38,7 +40,7 @@ public class AccountService {
         }
 
         // New account is considered valid
-        Account newAcc = new Account(accountDTO.getLogin(), passwordEncoder.encode(accountDTO.getPassword()), AccountRole.ROLE_USER);
+        Account newAcc = new Account(accountDTO.getLogin(), passwordEncoder.encode(accountDTO.getPassword()), AccountRole.ROLE_USER, new Date());
         repository.saveAndFlush(newAcc);
 
         return newAcc;

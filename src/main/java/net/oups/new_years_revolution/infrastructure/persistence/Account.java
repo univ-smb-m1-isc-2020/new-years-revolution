@@ -1,9 +1,7 @@
 package net.oups.new_years_revolution.infrastructure.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Account {
@@ -19,14 +17,18 @@ public class Account {
 
     private AccountRole role;
 
+    @Temporal(TemporalType.DATE)
+    private Date dateInscription;
+
     public Account() {
         // JPA
     }
 
-    public Account(String login, String password, AccountRole role) {
+    public Account(String login, String password, AccountRole role, Date dateInscription) {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.dateInscription = dateInscription;
     }
 
     public Long getId() {
@@ -59,5 +61,13 @@ public class Account {
 
     public void setRole(AccountRole role) {
         this.role = role;
+    }
+
+    public Date getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(Date dateInscription) {
+        this.dateInscription = dateInscription;
     }
 }

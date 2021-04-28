@@ -10,7 +10,7 @@
         <h2 th:utext="${resolution.getContenu()}">Résolution</h2>
         <h3>Par <a th:href="'/dashboard/user/' + ${resolution.getCreator().getLogin()}" th:utext="${resolution.getCreator().getLogin()}">Créateur</a></h3>
         <h3 th:utext="'À faire ' + ${resolution.getOccurence()} + ' fois par ' + ${resolution.getPeriode() == 0 ? 'jour' : 'semaine'}">Occurence</h3>
-        <h3 th:if="${(inscriptionInfo != null)}" th:utext="'Vous êtes abonné à cette résolution depuis le ' + ${#dates.format(inscriptionInfo.getDateInscription(), 'dd/MM/yyyy')}">Date d'inscription</h3>
+        <h3 th:if="${(inscriptionInfo != null)}" th:utext="'Vous êtes abonné à cette résolution depuis le ' + ${#dates.format(inscriptionInfo.getDateAbonnement(), 'dd/MM/yyyy')}">Date d'inscription</h3>
 
         <div id="error" th:if="${(error != null)}" th:text="${error}">
             Erreur

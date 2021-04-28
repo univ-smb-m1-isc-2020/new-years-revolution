@@ -1,8 +1,6 @@
 package net.oups.new_years_revolution.infrastructure.persistence;
 
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,16 +18,16 @@ public class Inscription {
     private Resolution resolution;
 
     @Temporal(TemporalType.DATE)
-    private Date dateInscription;
+    private Date dateAbonnement;
 
     public Inscription() {
         // JPA
     }
 
-    public Inscription(Account inscrit, Resolution resolution, Date dateInscription) {
+    public Inscription(Account inscrit, Resolution resolution, Date dateAbonnement) {
         this.inscrit = inscrit;
         this.resolution = resolution;
-        this.dateInscription = dateInscription;
+        this.dateAbonnement = dateAbonnement;
     }
 
     public Long getId() {
@@ -56,11 +54,11 @@ public class Inscription {
         this.resolution = resolution;
     }
 
-    public Date getDateInscription() {
-        return dateInscription;
+    public Date getDateAbonnement() {
+        return dateAbonnement;
     }
 
-    public void setDateInscription(Date dateInscription) {
-        this.dateInscription = dateInscription;
+    public void setDateAbonnement(Date dateInscription) {
+        this.dateAbonnement = dateInscription;
     }
 }
