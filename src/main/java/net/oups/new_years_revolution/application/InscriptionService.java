@@ -48,4 +48,11 @@ public class InscriptionService {
             return null;
         }
     }
+
+    public void deleteAllSubscribersForResolution(Resolution resolution) {
+        List<Inscription> inscrits = getInscritsForResolution(resolution);
+        for (Inscription ins : inscrits) {
+            repository.delete(ins);
+        }
+    }
 }

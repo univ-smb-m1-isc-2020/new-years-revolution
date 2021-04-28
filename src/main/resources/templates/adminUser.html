@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+        <title th:utext="'Administration - Compte de ' + ${username}">Compte utilisateur</title>
+    </head>
+    <body th:if="${accountNotExists}">
+        <div th:replace="fragments/header">...</div>
+
+        <h2 th:utext="'Le compte &lt;strong&gt;' + ${username} + '&lt;/strong&gt; n\'existe pas.'">Compte inexistant</h2>
+        <p><a href="/admin/">Retourner à la page d'administration</a></p>
+
+        <div th:replace="fragments/footer">...</div>
+    </body>
+
+    <body th:if="${!accountNotExists}">
+        <div th:replace="fragments/header">...</div>
+
+        <h2 th:utext="'Administration du compte de ' + ${username}">Page utilisateur</h2>
+        <h3 th:utext="'Inscrit depuis le ' + ${#dates.format(account.getDateInscription(), 'dd/MM/yyyy')}">Date inscription</h3>
+
+        <div id="error" th:if="${(error != null)}" th:text="${error}">
+            Erreur
+        </div>
+
+        <div id="success" th:if="${(success != null)}" th:text="${success}">
+            Succès
+        </div>
+
+        <br>
+        <form th:action="'/admin/user/' + ${username} + '/changePassword'" th:object="${accountDTO}" method="POST" enctype="utf8">
+            <h3>Modifier le mot de passe de l'utilisateur</h3>
+            <label>Nouveau mot de passe</label>
+            <input type="password" required th:field="*{password}">
+            <br>
+
+            <label>Confirmer le nouveau mot de passe</label>
+            <input type="password" required th:field="*{passwordMatch}">
+
+            <p style="visibility: hidden" th:value="${username}" th:field="*{login}">login</p>
+
+            <input type="submit" value="Modifier" />
+        </form>
+
+        <div th:replace="fragments/footer">...</div>
+    </body>
+</html>

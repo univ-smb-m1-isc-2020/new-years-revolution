@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -44,5 +45,22 @@ public class AccountService {
         repository.saveAndFlush(newAcc);
 
         return newAcc;
+    }
+
+    public Account changePassword(Account account, AccountDTO accountDTO) throws AccountPasswordNotMatchException {
+        if (!accountDTO.getPassword().equals(accountDTO.getPasswordMatch()))
+            throw new AccountPasswordNotMatchException("Passwords do not match.");
+
+        account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+        repository.save(account);
+        return account;
+    }
+
+    public int getAccountCount() {
+        return repository.findAll().size();
+    }
+
+    public List<Account> getAllAccounts() {
+        return repository.findAll();
     }
 }

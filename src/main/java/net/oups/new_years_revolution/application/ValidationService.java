@@ -62,5 +62,10 @@ public class ValidationService {
         return val;
     }
 
-
+    public void deleteAllValidationsForResolution(Resolution resolution) {
+        List<Validation> validations = getAllValidationsForResolution(resolution);
+        for (Validation val : validations) {
+            repository.delete(val);
+        }
+    }
 }

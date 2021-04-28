@@ -5,13 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin page</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+    <title>Administration</title>
 </head>
 <body>
 <div th:replace="fragments/header">...</div>
 
-<h1 th:text="${title}">Titre</h1>
-<img src="https://media3.giphy.com/media/Nx0rz3jtxtEre/200.gif" alt="Hello There GIF">
+<h1>Page d'administration de New Years Revolution</h1>
+<h2 th:utext="'Heure de prise des statistiques : ' + ${#dates.format(#dates.createNow(), 'dd/MM/yyyy à HH:mm:ss')}">Heure</h2>
+
+<div style="text-align: left">
+    <h3>Statistiques du site web</h3>
+    <p>Nombre de comptes enregistrés : <strong th:text="${accountsCount}">nbAcc</strong> (<a href="/admin/user">Voir la liste des comptes</a>)</p>
+    <p>Nombre de résolutions présentes : <strong th:text="${resolutionsCount}">nbRes</strong> (<a href="/admin/resolution">Voir la liste des résolutions</a>)</p>
+</div>
+<br>
+<div style="text-align: left">
+    <h3>Statistiques du serveur</h3>
+    <p>Application démarrée le : <strong th:utext="${#dates.format(startDate, 'dd/MM/yyyy à HH:mm:ss')}">Date démarrage</strong></p>
+    <p>Mémoire utilisée : <strong th:utext="${usedMemory} + 'MB / ' + ${totalMemory} + 'MB'">Mémoire</strong></p>
+</div>
 
 <div th:replace="fragments/footer">...</div>
 </body>

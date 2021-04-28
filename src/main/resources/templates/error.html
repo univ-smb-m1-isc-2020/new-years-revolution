@@ -20,7 +20,7 @@
     </tr>
     <tr>
         <td>Date</td>
-        <td th:text="${#dates.format(timestamp, 'dd/MM/yyyy hh:mm:ss')}"/>
+        <td th:text="${#dates.format(timestamp, 'dd/MM/yyyy à HH:mm:ss')}"/>
     </tr>
     <tr>
         <td>Path</td>
@@ -49,5 +49,7 @@
         </td>
     </tr>
 </table>
+
+<div th:replace="fragments/footer">...</div>
 </body>
 </html>

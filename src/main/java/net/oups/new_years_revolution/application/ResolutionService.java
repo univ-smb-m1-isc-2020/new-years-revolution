@@ -61,4 +61,16 @@ public class ResolutionService {
         }
         return resultList;
     }
+
+    public int getResolutionCount() {
+        return repository.findAll().size();
+    }
+
+    public List<Resolution> getAllResolutions() {
+        return repository.findAll();
+    }
+
+    public void deleteResolution(Resolution resolution) {
+        repository.delete(resolution);
+    }
 }

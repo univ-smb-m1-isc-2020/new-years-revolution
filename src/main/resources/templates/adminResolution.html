@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+        <title th:utext="'Administration - Résolution de ' + ${resolution.getCreator().getLogin()} + ' : ' + ${resolution.getContenu()}">Résolution</title>
+    </head>
+    <body>
+        <div th:replace="fragments/header">...</div>
+
+        <h2>Administration</h2>
+        <h2 th:utext="${resolution.getContenu()}">Résolution</h2>
+        <h3>Par <a th:href="'/dashboard/user/' + ${resolution.getCreator().getLogin()}" th:utext="${resolution.getCreator().getLogin()}">Créateur</a></h3>
+        <h3 th:utext="'À faire ' + ${resolution.getOccurence()} + ' fois par ' + ${resolution.getPeriode() == 0 ? 'jour' : 'semaine'}">Occurence</h3>
+
+        <div id="error" th:if="${(error != null)}" th:text="${error}">
+            Erreur
+        </div>
+
+        <div id="success" th:if="${(success != null)}" th:text="${success}">
+            Succès
+        </div>
+
+        <h3>Abonnés à la résolution : <strong th:utext="${inscritsCount}"></strong></h3>
+        <table>
+            <tr>
+                <th>Login</th>
+                <th>Date d'inscription</th>
+            </tr>
+            <tr th:if="${inscrits.size() == 0}">
+                <td colspan="2">Pas d'abonnés à cette résolution.</td>
+            </tr>
+            <tr th:each="inscrit : ${inscrits}">
+                <td><span th:text="${inscrit.getInscrit().getLogin()}">Nom</span></td>
+                <td><span th:text="${#dates.format(inscrit.getDateAbonnement(), 'dd/MM/yyyy')}">Date</span></td>
+            </tr>
+        </table>
+
+        <form th:action="'/admin/resolution/' + ${resolution.getId()} + '/supprimer'" method="POST" enctype="utf8">
+            <h3>Supprimer la résolution (irréversible)</h3>
+            <u>Attention : Cela supprimera également les validations réalisées par les abonnés à la résolution !</u><br>
+            <input type="submit" style="background-color: orangered" value="Supprimer la résolution" />
+        </form>
+
+        <div th:replace="fragments/footer">...</div>
+    </body>
+</html>
