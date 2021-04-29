@@ -18,23 +18,23 @@
     <tr>
         <th colspan="2">Informations détaillées</th>
     </tr>
-    <tr>
+    <tr th:if="${timestamp != null}">
         <td>Date</td>
         <td th:text="${#dates.format(timestamp, 'dd/MM/yyyy à HH:mm:ss')}"/>
     </tr>
-    <tr>
-        <td>Path</td>
+    <tr th:if="${path != null}">
+        <td>URL</td>
         <td th:text="${path}"/>
     </tr>
-    <tr>
-        <td>Error</td>
-        <td th:text="${error}"/>
-    </tr>
-    <tr>
-        <td>Status</td>
+    <tr th:if="${status != null}">
+        <td>Code d'erreur</td>
         <td th:text="${status}"/>
     </tr>
-    <tr>
+    <tr th:if="${error != null}">
+        <td>Erreur</td>
+        <td th:text="${error}"/>
+    </tr>
+    <tr th:if="${message != null}">
         <td>Message</td>
         <td th:text="${message}"/>
     </tr>
